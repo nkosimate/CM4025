@@ -31,6 +31,7 @@
       <input type="text" id="salary" name="salary" class="form-control" /><br><br>
       <label for="days">How many days do you think it will take you to make the website?</label>
       <input type="text" id="days" name="days" class="form-control" /><br><br>
+      <label for="quoteName">Name of Quote?</label>
       <input type="text" id="quoteName" name="name" class="form-control" /><br><br>
       <input type="button" id="storeQuote" value="Store Quote" class="btn btn-lg"><br><br>
       <input type="button" id="submit" value="Calculate your price!" class="btn btn-lg"><br><br>
@@ -64,6 +65,7 @@
     */
     // handling the submit button through the API
     $('#submit').click(handleClick);
+    $('#storeQuote').click(storeQuote);
 
     function handleClick() {
       var salary = $('#salary').val();
