@@ -1,5 +1,4 @@
 //https://stackoverflow.com/questions/5823722/how-to-serve-an-image-using-nodejs
-const { MongoClient } = require("mongodb");
 
 var path = require('path');
 var express = require('express');
@@ -8,7 +7,7 @@ var app = express();
 // The database
 //const MongoClient = require('mongodb').MongoClient;
 const { MongoClient } = require("mongodb");
-const uri = "mongodb://test:password@127.0.0.1:27017/mydb";
+const uri = "mongodb://127.0.0.1:27017";
 
 var options = {
     index: "myWebPage.html"
@@ -52,15 +51,9 @@ app.get('/api/storeQuote', function(req, res){
     const client = new MongoClient(uri);
     async function run() {
     try {
-        // Connect the client to the server (optional starting in v4.7)
-        //await client.connect();
-        // Establish and verify connection
-        //await client.db("admin").command({ ping: 1 });
-        //console.log("Connected successfully to server");
-        console.log('Start the database stuff');
         //Write databse Insert/Update/Query code here..
         var dbo = client.db("mydb");
-        var myobj = { quoteName: n, salary: s, days: d };
+        var myobj = { quoteName: n, salary: s, days: d }; //******CHECK!!!****
         await dbo.collection("quotes").insertOne(myobj, function(err, res) {
             if (err) {
                 console.log(err); 
@@ -76,6 +69,7 @@ app.get('/api/storeQuote', function(req, res){
     }
     }
     run().catch(console.dir);
+
 
 
 
