@@ -4,7 +4,11 @@ const { MongoClient } = require("mongodb");
 var path = require('path');
 var express = require('express');
 var app = express();
-const uri = "mongodb://127.0.0.1:27017";
+
+// The database
+//const MongoClient = require('mongodb').MongoClient;
+const { MongoClient } = require("mongodb");
+const uri = "mongodb://test:password@127.0.0.1:27017/mydb";
 
 var options = {
     index: "myWebPage.html"
@@ -32,17 +36,6 @@ app.get('/api/getPrice', function (req, res) {
     var roundToNearest = 50;
     roundedPrice = Math.round((price + roundToNearest) / roundToNearest) * roundToNearest // Always round up
     res.send("" + roundedPrice)
-});
-
-app.use(express.static(dir, options));
-
-// 404 page
-app.use(function (req, res, next) {
-    res.send('This page does not exist!')
-});
-
-app.listen(8000, function () {
-    console.log('Listening on http://localhost:8000/');
 });
 
 app.get('/api/storeQuote', function(req, res){
@@ -88,3 +81,15 @@ app.get('/api/storeQuote', function(req, res){
 
     res.send("stored "+n)
 });
+
+app.use(express.static(dir, options));
+
+// 404 page
+app.use(function (req, res, next) {
+    res.send('This page does not exist!')
+});
+
+app.listen(8000, function () {
+    console.log('Listening on http://localhost:8000/');
+});
+
